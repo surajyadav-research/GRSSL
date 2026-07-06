@@ -1,6 +1,5 @@
 # Breaking Spurious Correlations via Generative Randomization and Cross-Variant Self-Supervised Learning
 
-This repository provides the implementation for **Breaking Spurious Correlations via Generative Randomization and Cross-Variant Self-Supervised Learning**. The code supports experiments on Waterbirds, NICO++, and MetaShift using generated context variants, cross-variant self-supervised pretraining, and GroupDRO fine-tuning for worst-group generalization.
 
 **Paper:** [Breaking Spurious Correlations via Generative Randomization and Cross-Variant Self-Supervised Learning](paper/Breaking_Spurious_Correlations_via_Generative_Randomization_and_Cross_Variant_Self_Supervised_Learning.pdf)
 
@@ -8,9 +7,6 @@ This repository provides the implementation for **Breaking Spurious Correlations
 
 Deep neural networks trained with Empirical Risk Minimization (ERM) often fail under distribution shifts because they exploit spurious correlations between object labels and background context. Recent generative approaches address this issue by creating counterfactual images with altered contexts, but typically use these samples as standard data augmentation, leaving the model free to retain background-sensitive representations. We propose a two-stage framework that uses generative intervention to explicitly learn background-invariant visual representations. First, we isolate the foreground object using zero-shot segmentation and generate context-shifted variants with a structure-preserving diffusion model, preserving object identity while varying the surrounding environment. We then introduce Cross-Variant Self-Supervised Learning, where variants of the same object under different backgrounds form positive pairs in a contrastive objective. This encourages the encoder to align object-centric representations while suppressing background-specific cues. Then, we fine-tune the pretrained encoder using an ERM warm-up followed by GroupDRO with layer-wise learning rates. Experiments on distribution-shift benchmarks demonstrate best worst-group performance, achieving 92.5% on Waterbirds, 81.7% on MetaShift, and 87.4% on NICO++.
 
-## Overview
-
-The pipeline first creates context-diverse generated training images, then trains a self-supervised ResNet-50 encoder and a GroupDRO classifier for worst-group generalization.
 
 ## Pipeline
 
@@ -18,7 +14,6 @@ The pipeline first creates context-diverse generated training images, then train
   <img src="plots/architecture.png" alt="GRSSL pipeline" width="850"/>
 </p>
 
-The pipeline figure should be saved as `plots/architecture.png`. A PDF version is already present at `plots/architecture.pdf`; GitHub and most README viewers display the PNG directly.
 
 ## Repository Layout
 
