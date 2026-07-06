@@ -44,7 +44,6 @@ grssl/
     └── architecture.png
 ```
 
-All dataset paths are relative to the repository root, so the code can be run from a different machine as long as the same folder layout is preserved.
 
 ## Environment Setup
 
@@ -62,8 +61,6 @@ The generation scripts use Hugging Face models, including FLUX Fill, Grounding D
 ```bash
 HF_TOKEN=your_huggingface_token_here
 ```
-
-A CUDA GPU is strongly recommended for generation and training.
 
 ## Data Preparation
 
@@ -83,7 +80,6 @@ data/nico++/generated/
 data/metashifts/generated/
 ```
 
-The scripts currently use the `train` split for generation. To generate more splits, edit the `SPLITS` list near the top of each `generate.py` file.
 
 ## Run Image Generation
 
@@ -116,7 +112,6 @@ python code/metashift/generate.py
 Input: `data/metashifts/metashift_original/`  
 Output: `data/metashifts/generated/`
 
-Each generation script detects the foreground object, builds a mask, uses FLUX Fill to replace context/background, and saves generated images with CSV metadata. Debug outputs are saved under each dataset's `generated/debug/` directory.
 
 ## Run Training
 
@@ -159,5 +154,4 @@ output/nico++/
 output/metashift/
 ```
 
-Each dataset output directory contains per-seed checkpoints, logs, analysis CSV files, and final summary results. The key reported metric is worst-group accuracy (WGA), along with overall test accuracy where available.
 
