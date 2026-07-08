@@ -1,19 +1,18 @@
 # Breaking Spurious Correlations via Generative Randomization and Cross-Variant Self-Supervised Learning
 
+**Accepted at CVPR Workshop 2026 GCV**
 
-**Paper:** [Breaking Spurious Correlations via Generative Randomization and Cross-Variant Self-Supervised Learning](paper/Breaking_Spurious_Correlations_via_Generative_Randomization_and_Cross_Variant_Self_Supervised_Learning.pdf)
+**Paper:** [arXiv:2607.05850](https://arxiv.org/abs/2607.05850)
 
 ## Abstract
 
 Deep neural networks trained with Empirical Risk Minimization (ERM) often fail under distribution shifts because they exploit spurious correlations between object labels and background context. Recent generative approaches address this issue by creating counterfactual images with altered contexts, but typically use these samples as standard data augmentation, leaving the model free to retain background-sensitive representations. We propose a two-stage framework that uses generative intervention to explicitly learn background-invariant visual representations. First, we isolate the foreground object using zero-shot segmentation and generate context-shifted variants with a structure-preserving diffusion model, preserving object identity while varying the surrounding environment. We then introduce Cross-Variant Self-Supervised Learning, where variants of the same object under different backgrounds form positive pairs in a contrastive objective. This encourages the encoder to align object-centric representations while suppressing background-specific cues. Then, we fine-tune the pretrained encoder using an ERM warm-up followed by GroupDRO with layer-wise learning rates. Experiments on distribution-shift benchmarks demonstrate best worst-group performance, achieving 92.5% on Waterbirds, 81.7% on MetaShift, and 87.4% on NICO++.
-
 
 ## Pipeline
 
 <p align="center">
   <img src="plots/architecture.png" alt="GRSSL pipeline" width="850"/>
 </p>
-
 
 ## Repository Layout
 
@@ -43,7 +42,6 @@ grssl/
     ├── architecture.pdf
     └── architecture.png
 ```
-
 
 ## Environment Setup
 
@@ -80,7 +78,6 @@ data/nico++/generated/
 data/metashifts/generated/
 ```
 
-
 ## Run Image Generation
 
 Run the generation script for each dataset before training if generated images are not already present.
@@ -91,7 +88,7 @@ Run the generation script for each dataset before training if generated images a
 python code/waterbirds/generate.py
 ```
 
-Input: `data/waterbirds/waterbirds_original/`  
+Input: `data/waterbirds/waterbirds_original/`
 Output: `data/waterbirds/generated/`
 
 ### NICO++
@@ -100,7 +97,7 @@ Output: `data/waterbirds/generated/`
 python code/nico++/generate.py
 ```
 
-Input: `data/nico++/nico_original/`  
+Input: `data/nico++/nico_original/`
 Output: `data/nico++/generated/`
 
 ### MetaShift
@@ -109,9 +106,8 @@ Output: `data/nico++/generated/`
 python code/metashift/generate.py
 ```
 
-Input: `data/metashifts/metashift_original/`  
+Input: `data/metashifts/metashift_original/`
 Output: `data/metashifts/generated/`
-
 
 ## Run Training
 
@@ -154,4 +150,16 @@ output/nico++/
 output/metashift/
 ```
 
+## Citation
 
+```bibtex
+@misc{yadav2026breakingspuriouscorrelationsgenerative,
+      title={Breaking Spurious Correlations via Generative Randomization and Cross-Variant Self-Supervised Learning}, 
+      author={Suraj Yadav and Anjaneya Sharma and Siddharth Yadav},
+      year={2026},
+      eprint={2607.05850},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2607.05850}, 
+}
+```
