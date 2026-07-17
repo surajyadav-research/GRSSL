@@ -216,20 +216,22 @@ class MetaShiftMultiViewSSLDataset(Dataset):
         self.num_views = num_views
         root = Path(root_dir)
 
-        groups, group_meta = defaultdict(list), {}
+        groups = defaultdict(list)
         for fp in sorted(root.iterdir()):
             if not fp.is_file() or fp.suffix.lower() not in IMAGE_EXTS: continue
             if not re.match(r"^\d+_(orig|var\d+)$", fp.stem): continue
-            label, place = get_meta_for_generated_training_file(fp)
+            label, _ = get_meta_for_generated_training_file(fp)
             if label is None: continue
             key = get_group_key(fp.stem)
             groups[key].append(fp)
-            group_meta[key] = (label, place)
 
         self.groups, self.group_ids = [], []
         for key, files in groups.items():
             if len(files) < 2: continue
-            label, place = group_meta[key]
+            # Balance SSL source-object groups by original/source environment.
+            orig_file = next((f for f in files if f.stem.endswith("_orig")), files[0])
+            label, place = get_meta_for_generated_training_file(orig_file)
+            if label is None or place is None: continue
             self.groups.append(files)
             self.group_ids.append(group_id_from_label_place(label, place))
 
